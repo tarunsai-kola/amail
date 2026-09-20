@@ -610,9 +610,13 @@ app.get("/{*path}", (req, res) => {
 });
 
 // ─────────────────────────────────────────────
-//  Start
+//  Start (local) or Export (Vercel serverless)
 // ─────────────────────────────────────────────
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("\n  🚀  Mail Sender → http://localhost:" + PORT + "\n");
-});
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log("\n  🚀  Mail Sender → http://localhost:" + PORT + "\n");
+  });
+}
+
+module.exports = app;
